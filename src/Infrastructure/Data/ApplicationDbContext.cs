@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace QuestionaryInvestigation.Web.Data
+namespace QuestionaryInvestigation.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
