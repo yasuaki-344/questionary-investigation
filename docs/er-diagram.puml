@@ -1,0 +1,40 @@
+@startuml entity-relationship
+' hide the sport
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity Question {
+  * QuestionID: number <<generated>>
+  --
+  * Content: text
+  * Type: number
+  * Sort: number
+}
+
+entity QuestionChoice {
+  * QuestionChoiceID: number <<generated>>
+  --
+  * QuestionID: number <<FK>>
+  * QuestionString: text
+}
+
+entity Answer {
+  * AnswerID: number <<generated>>
+  --
+  * AnswerDatetime: datetime
+}
+
+entity AnswerDetail {
+  * AnswerDetailID: number <<generated>>
+  --
+  * QuestionID: number <<FK>>
+  * AnswerID: number <<FK>>
+  AnswerDatail: text
+}
+
+Answer }o--|| AnswerDetail
+Question }o--|| QuestionChoice
+Question }o--|| AnswerDetail
+@enduml
