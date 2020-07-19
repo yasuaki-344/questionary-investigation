@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuestionaryInvestigation
+namespace QuestionaryInvestigation.Web
 {
     public class Program
     {

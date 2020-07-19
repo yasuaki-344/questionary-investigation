@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using QuestionaryInvestigation.Data;
+using QuestionaryInvestigation.Web.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuestionaryInvestigation
+namespace QuestionaryInvestigation.Web
 {
     public class Startup
     {

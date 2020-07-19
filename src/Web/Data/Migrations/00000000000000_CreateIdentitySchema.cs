@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace QuestionaryInvestigation.Data.Migrations
+namespace QuestionaryInvestigation.Web.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

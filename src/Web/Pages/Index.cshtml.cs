@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuestionaryInvestigation.Pages
+namespace QuestionaryInvestigation.Web.Pages
 {
     public class IndexModel : PageModel
     {

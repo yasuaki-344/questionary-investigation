@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A30B78C8-73EC-45CF-8322-3127858A2DD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionaryInvestigation", "src\QuestionaryInvestigation\QuestionaryInvestigation.csproj", "{29A307B6-7E7C-4DED-A14F-6D1405EEB8E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionaryInvestigation", "src\Web\Web.csproj", "{29A307B6-7E7C-4DED-A14F-6D1405EEB8E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
