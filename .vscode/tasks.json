@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/QuestionaryInvestigation/QuestionaryInvestigation.csproj",
+                "${workspaceFolder}/src/Web/Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/QuestionaryInvestigation/QuestionaryInvestigation.csproj",
+                "${workspaceFolder}/src/Web/Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -31,8 +31,9 @@
             "type": "process",
             "args": [
                 "watch",
+                "--project",
+                "${workspaceFolder}/src/Web/Web.csproj",
                 "run",
-                "${workspaceFolder}/src/QuestionaryInvestigation/QuestionaryInvestigation.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
