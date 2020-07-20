@@ -2,26 +2,33 @@
 @model Web.Pages.Questions.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "質問項目作成";
 }
 
-<h1>Create</h1>
+<h1>新規質問項目の作成</h1>
 
-<h4>Question</h4>
+<h4>質問内容</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Question.Content" class="control-label"></label>
-                <input asp-for="Question.Content" class="form-control" />
+                <label asp-for="Question.Content" class="control-label">質問項目</label>
+                <input asp-for="Question.Content" class="form-control" placeholder="質問内容をここに記述回答方式を選択してください" />
                 <span asp-validation-for="Question.Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question.Type" class="control-label"></label>
-                <input asp-for="Question.Type" class="form-control" />
+                <label asp-for="Question.Type" class="control-label">回答方式</label>
+                <select asp-for="Question.Type" class="form-control" id="question-type">
+                    <option selected disabled>回答方式を選択してくだい</option>
+                    <option value="0">自由記述</option>
+                    <option value="1">項目選択</option>
+                    <option value="2">複数選択</option>
+                </select>
                 <span asp-validation-for="Question.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group " id="choice-list">
             </div>
             <div class="form-group">
                 <label asp-for="Question.Sort" class="control-label"></label>
@@ -29,7 +36,7 @@
                 <span asp-validation-for="Question.Sort" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="新規作成" class="btn btn-primary" />
             </div>
         </form>
     </div>
