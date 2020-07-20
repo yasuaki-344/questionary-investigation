@@ -2,13 +2,13 @@
 @model Web.Pages.Questions.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "質問項目一覧";
 }
 
-<h1>Index</h1>
+<h1>質問項目一覧</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">新規作成</a>
 </p>
 <table class="table">
     <thead>
@@ -38,9 +38,9 @@
                 @Html.DisplayFor(modelItem => item.Sort)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.QuestionID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.QuestionID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.QuestionID">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.QuestionID">編集</a> |
+                <a asp-page="./Details" asp-route-id="@item.QuestionID">詳細</a> |
+                <a asp-page="./Delete" asp-route-id="@item.QuestionID">削除</a>
             </td>
         </tr>
 }
