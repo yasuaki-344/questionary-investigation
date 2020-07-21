@@ -16,6 +16,29 @@ selectedItem.addEventListener('change', (e) => {
 });
 
 /**
+ * 選択肢追加ボタンの機能実装
+ */
+const btnAddChoice = document.getElementById('btn-add-choice');
+btnAddChoice.addEventListener('click', () => {
+  const choiceItems = document.getElementById('choice-items');
+  const addElements = document.getElementById('choice-element-base').children;
+  const addItem = document.createElement('li');
+  for (let i = 0; i < addElements.length; i++) {
+    addItem.appendChild(addElements[i].cloneNode(true));
+  }
+  choiceItems.insertAdjacentElement('beforeend', addItem);
+});
+
+/**
+ * 選択肢削除ボタンの機能実装
+ */
+const btnRemoveChoice = document.getElementById('btn-remove-choice');
+btnRemoveChoice.addEventListener('click', () => {
+  const choiceItems = document.getElementById('choice-items');
+  choiceItems.lastChild.remove();
+});
+
+/**
  * DOM読み込み完了時の処理
  */
 document.addEventListener('DOMContentLoaded', function () {

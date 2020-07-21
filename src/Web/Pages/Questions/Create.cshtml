@@ -14,8 +14,13 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Question.Sort" class="control-label">質問番号</label>
+                <input asp-for="Question.Sort" class="form-control" />
+                <span asp-validation-for="Question.Sort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Question.Content" class="control-label">質問項目</label>
-                <input asp-for="Question.Content" class="form-control" placeholder="質問内容をここに記述回答方式を選択してください" />
+                <input asp-for="Question.Content" class="form-control" placeholder="質問内容をここに記述してください" />
                 <span asp-validation-for="Question.Content" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,13 +33,16 @@
                 </select>
                 <span asp-validation-for="Question.Type" class="text-danger"></span>
             </div>
-            <div class="form-group " id="choice-list">
-            </div>
             <div class="form-group">
-                <label asp-for="Question.Sort" class="control-label"></label>
-                <input asp-for="Question.Sort" class="form-control" />
-                <span asp-validation-for="Question.Sort" class="text-danger"></span>
+                <label class="control-label">選択肢</label>
+                <ol id="choice-items">
+                </ol>
+                <button type="button" class="btn btn-primary" id="btn-add-choice">選択肢追加</button>
+                <button type="button" class="btn btn-primary" id="btn-remove-choice">選択肢削除</button>
             </div>
+            <div class="form-group" id="choice-list">
+            </div>
+            <hr />
             <div class="form-group">
                 <input type="submit" value="新規作成" class="btn btn-primary" />
             </div>
@@ -44,6 +52,12 @@
 
 <div>
     <a asp-page="Index">質問項目一覧に戻る</a>
+</div>
+
+<div hidden id="choice-element-base">
+    <input class="form-control" type="text" />
+    <input type="hidden" value="0" />
+    <input type="hidden" value="0" />
 </div>
 
 @section Scripts {
