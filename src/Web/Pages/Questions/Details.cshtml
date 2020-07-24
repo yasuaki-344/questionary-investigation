@@ -2,36 +2,56 @@
 @model Web.Pages.Questions.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "質問項目詳細";
 }
 
-<h1>Details</h1>
+<h1>詳細</h1>
 
 <div>
-    <h4>Question</h4>
+    <h4>質問内容</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Question.Content)
-        </dt>
+        <dt class="col-sm-2">質問番号</dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Question.Content)
+            @Html.DisplayFor(model => model.Question!.Sort)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Question.Type)
-        </dt>
+        <dt class="col-sm-2">質問項目</dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Question.Type)
+            @Html.DisplayFor(model => model.Question!.Content)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Question.Sort)
-        </dt>
+        <dt class="col-sm-2">回答方式</dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Question.Sort)
+            @switch (Model.Question!.Type)
+            {
+                case 0:
+                    <span>自由記述</span>
+                    break;
+                case 1:
+                    <span>項目選択</span>
+                    break;
+                case 2:
+                    <span>複数選択</span>
+                    break;
+                default:
+                break;
+            }
         </dd>
+        @if(Model.Question!.Type == 1 || Model.Question!.Type == 2)
+        {
+            <dt class="col-sm-2">選択肢</dt>
+            <dd class="col-sm-10">
+                @if (Model.Question!.QuestionChoices != null)
+                {
+                    foreach (var item in Model.Question.QuestionChoices)
+                    {
+                        <p>@item.QuestionString</p>
+                    }
+                }
+            </dd>
+        }
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Question.QuestionID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Question?.QuestionID">編集</a> |
+    <a asp-page="./Index">質問項目一覧に戻る</a>
 </div>
