@@ -23,8 +23,12 @@ btnAddChoice.addEventListener('click', () => {
   const choiceItems = document.getElementById('choice-items');
   const addElements = document.getElementById('choice-element-base').children;
   const addItem = document.createElement('li');
+
+  const index = choiceItems.childElementCount;
   for (let i = 0; i < addElements.length; i++) {
-    addItem.appendChild(addElements[i].cloneNode(true));
+    const element = addElements[i].cloneNode(true);
+    element.name = 'QuestionChoices[' + index + '].QuestionString';
+    addItem.appendChild(element);
   }
   choiceItems.insertAdjacentElement('beforeend', addItem);
 });

@@ -27,6 +27,9 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
         [BindProperty]
         public Question Question { get; set; }
 
+        [BindProperty]
+        public List<QuestionChoice> QuestionChoices { get; set; }
+
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -35,6 +38,7 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
             {
                 return Page();
             }
+            Question.QuestionChoices = QuestionChoices;
 
             _context.Question.Add(Question);
             await _context.SaveChangesAsync();
