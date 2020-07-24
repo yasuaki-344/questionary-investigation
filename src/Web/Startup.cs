@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuestionaryInvestigation.ApplicationCore.Interfaces;
+using QuestionaryInvestigation.Infrastructure;
 using QuestionaryInvestigation.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,7 @@ namespace QuestionaryInvestigation.Web
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddScoped<IQuestionaryInvestigationRepository, QuestionaryInvestigationRepository>();
             services.AddRazorPages();
         }
 
