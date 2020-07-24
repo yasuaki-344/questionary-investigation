@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using QuestionaryInvestigation.ApplicationCore.Entities;
+using QuestionaryInvestigation.ApplicationCore.Interfaces;
 using QuestionaryInvestigation.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,11 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
 {
     public class CreateModel : PageModel
     {
-        private readonly QuestionaryInvestigation.Infrastructure.Data.ApplicationDbContext _context;
+        private readonly IQuestionaryInvestigationRepository _repository;
 
-        public CreateModel(QuestionaryInvestigation.Infrastructure.Data.ApplicationDbContext context)
+        public CreateModel(IQuestionaryInvestigationRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         public IActionResult OnGet()
@@ -25,10 +26,10 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
         }
 
         [BindProperty]
-        public Question Question { get; set; }
+        public Question Question { get; set; } = new Question();
 
         [BindProperty]
-        public List<QuestionChoice> QuestionChoices { get; set; }
+        public List<QuestionChoice> QuestionChoices { get; set; } = new List<QuestionChoice>();
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -40,8 +41,7 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
             }
             Question.QuestionChoices = QuestionChoices;
 
-            _context.Question.Add(Question);
-            await _context.SaveChangesAsync();
+            await _repository.CreateQuestionAsync(Question);
 
             return RedirectToPage("./Index");
         }
