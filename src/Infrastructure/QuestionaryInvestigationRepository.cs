@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using QuestionaryInvestigation.ApplicationCore.Entities;
 using QuestionaryInvestigation.ApplicationCore.Interfaces;
 using QuestionaryInvestigation.Infrastructure.Data;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepository
@@ -12,6 +13,9 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
     {
         _context = context;
     }
+
+    public async Task<IList<Question>> GetAllQuestionsAsync() =>
+        await _context.Question.ToListAsync();
 
     public async Task<Question> GetQuestionByIdAsync(int? id)
     {
