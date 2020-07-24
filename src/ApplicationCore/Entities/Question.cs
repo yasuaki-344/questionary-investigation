@@ -9,6 +9,6 @@ namespace QuestionaryInvestigation.ApplicationCore.Entities
         public string Content { get; set; } = string.Empty;
         public int Type { get; set; }
         public int Sort { get; set; }
-        public ICollection<QuestionChoice>? QuestionDetails { get; set; }
+        public ICollection<QuestionChoice>? QuestionChoices { get; set; }
     }
 }
