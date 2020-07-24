@@ -30,10 +30,28 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
             return null;
         }
     }
+    public async Task<Question> FindQuestionByIdAsync(int? id)
+    {
+        if (id != null)
+        {
+            return await _context.Question.FindAsync(id);
+        }
+        else
+        {
+            return null;
+        }
+    }
 
     public async Task CreateQuestionAsync(Question question)
     {
         _context.Question.Add(question);
         await _context.SaveChangesAsync();
     }
+
+    public async Task RemoveQuestionAsync(Question question)
+    {
+        _context.Question.Remove(question);
+        await _context.SaveChangesAsync();
+    }
+
 }

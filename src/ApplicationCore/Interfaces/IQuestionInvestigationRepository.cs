@@ -8,6 +8,8 @@ namespace QuestionaryInvestigation.ApplicationCore.Interfaces
     {
         Task<IList<Question>> GetAllQuestionsAsync();
         Task<Question> GetQuestionByIdAsync(int? id);
+        Task<Question> FindQuestionByIdAsync(int? id);
         Task CreateQuestionAsync(Question question);
+        Task RemoveQuestionAsync(Question question);
     }
 }

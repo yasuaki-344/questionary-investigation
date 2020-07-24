@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using QuestionaryInvestigation.ApplicationCore.Entities;
+using QuestionaryInvestigation.ApplicationCore.Interfaces;
 using QuestionaryInvestigation.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,14 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
 {
     public class DeleteModel : PageModel
     {
-        private readonly QuestionaryInvestigation.Infrastructure.Data.ApplicationDbContext _context;
-
-        public DeleteModel(QuestionaryInvestigation.Infrastructure.Data.ApplicationDbContext context)
+        private readonly IQuestionaryInvestigationRepository _repository;
+        public DeleteModel(IQuestionaryInvestigationRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [BindProperty]
-        public Question Question { get; set; }
+        public Question? Question { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +29,7 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
                 return NotFound();
             }
 
-            Question = await _context.Question.FirstOrDefaultAsync(m => m.QuestionID == id);
+            Question = await _repository.GetQuestionByIdAsync(id);
 
             if (Question == null)
             {
@@ -45,12 +45,11 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
                 return NotFound();
             }
 
-            Question = await _context.Question.FindAsync(id);
+            Question = await _repository.FindQuestionByIdAsync(id);
 
             if (Question != null)
             {
-                _context.Question.Remove(Question);
-                await _context.SaveChangesAsync();
+                await _repository.RemoveQuestionAsync(Question);
             }
 
             return RedirectToPage("./Index");
