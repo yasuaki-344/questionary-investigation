@@ -3,6 +3,7 @@ using QuestionaryInvestigation.ApplicationCore.Entities;
 using QuestionaryInvestigation.ApplicationCore.Interfaces;
 using QuestionaryInvestigation.Infrastructure.Data;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepository
@@ -13,6 +14,9 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
     {
         _context = context;
     }
+
+    public bool QuestionExists(int id) =>
+        _context.Question.Any(e => e.QuestionID == id);
 
     public async Task<IList<Question>> GetAllQuestionsAsync() =>
         await _context.Question.ToListAsync();
@@ -47,6 +51,12 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
     public async Task CreateQuestionAsync(Question question)
     {
         _context.Question.Add(question);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateQuestionAsync(Question question)
+    {
+        _context.Attach(question).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
 

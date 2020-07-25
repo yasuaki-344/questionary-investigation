@@ -2,44 +2,71 @@
 @model Web.Pages.Questions.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "質問項目の編集";
 }
 
-<h1>Edit</h1>
+<h1>質問項目の編集</h1>
 
-<h4>Question</h4>
+<h4>質問内容</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Question.QuestionID" />
             <div class="form-group">
-                <label asp-for="Question.Content" class="control-label"></label>
-                <input asp-for="Question.Content" class="form-control" />
-                <span asp-validation-for="Question.Content" class="text-danger"></span>
+                <label asp-for="Question!.Sort" class="control-label">質問番号</label>
+                <input asp-for="Question!.Sort" class="form-control" />
+                <span asp-validation-for="Question!.Sort" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question.Type" class="control-label"></label>
-                <input asp-for="Question.Type" class="form-control" />
-                <span asp-validation-for="Question.Type" class="text-danger"></span>
+                <label asp-for="Question!.Content" class="control-label">質問項目</label>
+                <input asp-for="Question!.Content" class="form-control" placeholder="質問内容をここに記述してください" />
+                <span asp-validation-for="Question!.Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question.Sort" class="control-label"></label>
-                <input asp-for="Question.Sort" class="form-control" />
-                <span asp-validation-for="Question.Sort" class="text-danger"></span>
+                <label asp-for="Question!.Type" class="control-label">回答方式</label>
+                <select asp-for="Question!.Type" class="form-control" id="question-type">
+                    <option selected disabled>回答方式を選択してくだい</option>
+                    <option value="0">自由記述</option>
+                    <option value="1">項目選択</option>
+                    <option value="2">複数選択</option>
+                </select>
+                <span asp-validation-for="Question!.Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label class="control-label">選択肢</label>
+                <ol id="choice-items">
+                    @for (int i = 0; i < Model.Question!.QuestionChoices!.Count; i++)
+                    {
+                        <li>
+                            <input class="form-control" type="text" 
+                                   value="@Model.Question!.QuestionChoices.ToList()[i].QuestionString"
+                                   name="QuestionChoices[@i].QuestionString")/>
+                        </li>
+                    }
+                </ol>
+                <button type="button" class="btn btn-primary" id="btn-add-choice">選択肢追加</button>
+                <button type="button" class="btn btn-primary" id="btn-remove-choice">選択肢削除</button>
+            </div>
+            <div class="form-group" id="choice-list">
+            </div>
+            <hr />
+            <div class="form-group">
+                <input type="submit" value="保存" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="Index">質問項目一覧に戻る</a>
+</div>
+
+<div hidden id="choice-element-base">
+    <input class="form-control" type="text" />
 </div>
 
 @section Scripts {
+    <script type="text/javascript" src="~/js/question.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

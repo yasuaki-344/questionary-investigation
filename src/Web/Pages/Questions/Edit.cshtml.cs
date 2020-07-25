@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QuestionaryInvestigation.ApplicationCore.Entities;
-using QuestionaryInvestigation.Infrastructure.Data;
+using QuestionaryInvestigation.ApplicationCore.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +13,15 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
 {
     public class EditModel : PageModel
     {
-        private readonly QuestionaryInvestigation.Infrastructure.Data.ApplicationDbContext _context;
+        private readonly IQuestionaryInvestigationRepository _repository;
 
-        public EditModel(QuestionaryInvestigation.Infrastructure.Data.ApplicationDbContext context)
+        public EditModel(IQuestionaryInvestigationRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [BindProperty]
-        public Question Question { get; set; }
+        public Question? Question { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,7 +30,7 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
                 return NotFound();
             }
 
-            Question = await _context.Question.FirstOrDefaultAsync(m => m.QuestionID == id);
+            Question = await _repository.GetQuestionByIdAsync(id);
 
             if (Question == null)
             {
@@ -48,15 +48,16 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
                 return Page();
             }
 
-            _context.Attach(Question).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                if (Question != null)
+                {
+                    await _repository.UpdateQuestionAsync(Question);
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!QuestionExists(Question.QuestionID))
+                if (!_repository.QuestionExists(Question!.QuestionID))
                 {
                     return NotFound();
                 }
@@ -67,11 +68,6 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
             }
 
             return RedirectToPage("./Index");
-        }
-
-        private bool QuestionExists(int id)
-        {
-            return _context.Question.Any(e => e.QuestionID == id);
         }
     }
 }
