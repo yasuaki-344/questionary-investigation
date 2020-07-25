@@ -13,30 +13,36 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Question[0].Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question[0].Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question[0].Sort)
-            </th>
-            <th></th>
+            <th>質問番号</th>
+            <th>質問項目</th>
+            <th>回答方式</th>
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model.Question) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Sort)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            @switch (item.Type)
+            {
+                case 0:
+                    <td>自由記述</td>
+                    break;
+                case 1:
+                    <td>項目選択</td>
+                    break;
+                case 2:
+                    <td>複数選択</td>
+                    break;
+                default:
+                    <th>&nbsp;</th>
+                    break;
+            }
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.QuestionID">編集</a> |
                 <a asp-page="./Details" asp-route-id="@item.QuestionID">詳細</a> |
