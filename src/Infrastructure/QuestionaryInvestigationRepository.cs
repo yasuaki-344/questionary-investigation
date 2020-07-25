@@ -19,7 +19,7 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
         _context.Question.Any(e => e.QuestionID == id);
 
     public async Task<IList<Question>> GetAllQuestionsAsync() =>
-        await _context.Question.ToListAsync();
+        await _context.Question.AsNoTracking().ToListAsync();
 
     public async Task<Question> GetQuestionByIdAsync(int? id)
     {
@@ -27,6 +27,7 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
         {
             return await _context.Question
                 .Include(s => s.QuestionChoices)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.QuestionID == id);
         }
         else
@@ -34,12 +35,14 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
             return null;
         }
     }
+
     public async Task<Question> FindQuestionByIdAsync(int? id)
     {
         if (id != null)
         {
             return await _context.Question
                 .Include(s => s.QuestionChoices)
+                .AsNoTracking()
                 .FirstAsync(m => m.QuestionID == id);
         }
         else
