@@ -33,14 +33,14 @@
                 </select>
                 <span asp-validation-for="Question.Type" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label class="control-label">選択肢</label>
-                <ol id="choice-items">
-                </ol>
-                <button type="button" class="btn btn-primary" id="btn-add-choice">選択肢追加</button>
-                <button type="button" class="btn btn-primary" id="btn-remove-choice">選択肢削除</button>
-            </div>
             <div class="form-group" id="choice-list">
+                <div class="form-group">
+                    <label class="control-label">選択肢</label>
+                    <ol id="choice-items">
+                    </ol>
+                    <button type="button" class="btn btn-primary" id="btn-add-choice">選択肢追加</button>
+                    <button type="button" class="btn btn-primary" id="btn-remove-choice">選択肢削除</button>
+                </div>
             </div>
             <hr />
             <div class="form-group">
