@@ -34,7 +34,9 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
     {
         if (id != null)
         {
-            return await _context.Question.FindAsync(id);
+            return await _context.Question
+                .Include(s => s.QuestionChoices)
+                .FirstAsync(m => m.QuestionID == id);
         }
         else
         {
@@ -53,5 +55,4 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
         _context.Question.Remove(question);
         await _context.SaveChangesAsync();
     }
-
 }
