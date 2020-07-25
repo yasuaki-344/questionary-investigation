@@ -68,4 +68,7 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
         _context.Question.Remove(question);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IList<Answer>> GetAllAnswersAsync() =>
+        await _context.Answer.AsNoTracking().ToListAsync();
 }

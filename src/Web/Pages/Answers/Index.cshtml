@@ -2,21 +2,19 @@
 @model Web.Pages.Answers.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "回答一覧";
 }
 
-<h1>Index</h1>
+<h1>回答一覧</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">新規回答作成</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Answer[0].AnswerDatetime)
-            </th>
-            <th></th>
+            <th>回答日</th>
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
@@ -26,9 +24,9 @@
                 @Html.DisplayFor(modelItem => item.AnswerDatetime)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.AnswerID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.AnswerID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.AnswerID">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.AnswerID">編集</a> |
+                <a asp-page="./Details" asp-route-id="@item.AnswerID">詳細</a> |
+                <a asp-page="./Delete" asp-route-id="@item.AnswerID">削除</a>
             </td>
         </tr>
 }

@@ -13,5 +13,6 @@ namespace QuestionaryInvestigation.ApplicationCore.Interfaces
         Task CreateQuestionAsync(Question question);
         Task UpdateQuestionAsync(Question question);
         Task RemoveQuestionAsync(Question question);
+        Task<IList<Answer>> GetAllAnswersAsync();
     }
 }
