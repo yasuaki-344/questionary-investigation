@@ -13,25 +13,26 @@
     <div class="col-md-12">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Question.QuestionID" />
             <div class="form-group">
-                <label asp-for="Question!.Sort" class="control-label">質問番号</label>
-                <input asp-for="Question!.Sort" class="form-control" />
-                <span asp-validation-for="Question!.Sort" class="text-danger"></span>
+                <label asp-for="Question.Sort" class="control-label">質問番号</label>
+                <input asp-for="Question.Sort" class="form-control" />
+                <span asp-validation-for="Question.Sort" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question!.Content" class="control-label">質問項目</label>
-                <input asp-for="Question!.Content" class="form-control" placeholder="質問内容をここに記述してください" />
-                <span asp-validation-for="Question!.Content" class="text-danger"></span>
+                <label asp-for="Question.Content" class="control-label">質問項目</label>
+                <input asp-for="Question.Content" class="form-control" placeholder="質問内容をここに記述してください" />
+                <span asp-validation-for="Question.Content" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Question!.Type" class="control-label">回答方式</label>
-                <select asp-for="Question!.Type" class="form-control" id="question-type">
+                <label asp-for="Question.Type" class="control-label">回答方式</label>
+                <select asp-for="Question.Type" class="form-control" id="question-type">
                     <option selected disabled>回答方式を選択してくだい</option>
                     <option value="0">自由記述</option>
                     <option value="1">項目選択</option>
                     <option value="2">複数選択</option>
                 </select>
-                <span asp-validation-for="Question!.Type" class="text-danger"></span>
+                <span asp-validation-for="Question.Type" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">選択肢</label>
@@ -40,7 +41,7 @@
                     {
                         <li>
                             <input class="form-control" type="text" 
-                                   value="@Model.Question!.QuestionChoices.ToList()[i].QuestionString"
+                                   value="@Model.Question.QuestionChoices.ToList()[i].QuestionString"
                                    name="QuestionChoices[@i].QuestionString")/>
                         </li>
                     }

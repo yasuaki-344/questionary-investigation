@@ -59,6 +59,9 @@ public class QuestionaryInvestigationRepository : IQuestionaryInvestigationRepos
 
     public async Task UpdateQuestionAsync(Question question)
     {
+        var choices = _context.QuestionChoice
+            .Where(e => e.QuestionID == question.QuestionID);
+        _context.QuestionChoice.RemoveRange(choices);
         _context.Attach(question).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }

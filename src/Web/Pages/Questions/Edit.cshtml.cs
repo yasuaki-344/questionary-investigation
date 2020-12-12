@@ -21,7 +21,10 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
         }
 
         [BindProperty]
-        public Question? Question { get; set; }
+        public Question Question { get; set; } = new Question();
+
+        [BindProperty]
+        public List<QuestionChoice> QuestionChoices { get; set; } = new List<QuestionChoice>();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -52,6 +55,7 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
             {
                 if (Question != null)
                 {
+                    Question.QuestionChoices = QuestionChoices;
                     await _repository.UpdateQuestionAsync(Question);
                 }
             }
