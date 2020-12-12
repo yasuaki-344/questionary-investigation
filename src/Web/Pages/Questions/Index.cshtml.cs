@@ -25,5 +25,22 @@ namespace QuestionaryInvestigation.Web.Pages.Questions
         {
             Question = await _repository.GetAllQuestionsAsync();
         }
+
+        public async Task<IActionResult> OnGetDeleteAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var Question = await _repository.FindQuestionByIdAsync(id);
+
+            if (Question != null)
+            {
+                await _repository.RemoveQuestionAsync(Question);
+            }
+
+            return RedirectToPage();
+        }
     }
 }

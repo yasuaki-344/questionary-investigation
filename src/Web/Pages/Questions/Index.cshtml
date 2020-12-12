@@ -20,35 +20,57 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Question) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sort)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            @switch (item.Type)
-            {
-                case 0:
-                    <td>自由記述</td>
-                    break;
-                case 1:
-                    <td>項目選択</td>
-                    break;
-                case 2:
-                    <td>複数選択</td>
-                    break;
-                default:
-                    <th>&nbsp;</th>
-                    break;
-            }
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.QuestionID">編集</a> |
-                <a asp-page="./Details" asp-route-id="@item.QuestionID">詳細</a> |
-                <a asp-page="./Delete" asp-route-id="@item.QuestionID">削除</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Question)
+        {
+            var tm = $"#modal-{item.QuestionID}";
+            var mid = $"modal-{item.QuestionID}";
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sort)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                @switch (item.Type)
+                {
+                    case 0:
+                        <td>自由記述</td>
+                        break;
+                    case 1:
+                        <td>項目選択</td>
+                        break;
+                    case 2:
+                        <td>複数選択</td>
+                        break;
+                    default:
+                        <th>&nbsp;</th>
+                        break;
+                }
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.QuestionID">編集</a> |
+                    <a asp-page="./Details" asp-route-id="@item.QuestionID">詳細</a> |
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="@tm">
+                        削除
+                    </button>
+                    <div class="modal fade" id="@mid" tabindex="-1" role="dialog" aria-labelledby="modal-label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="modal-label">削除確認</h4>
+                                </div>
+                                <div class="modal-body">
+                                    この質問を削除しますか?
+                                </div>
+                                <div class="modal-footer">
+                                    <a asp-page-handler="Delete" asp-route-id="@item.QuestionID" id="deleteBtn" class="btn bg-danger mr-1">OK</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
