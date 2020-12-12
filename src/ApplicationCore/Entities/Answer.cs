@@ -8,6 +8,6 @@ namespace QuestionaryInvestigation.ApplicationCore.Entities
     {
         public int AnswerID { get; set; }
         public DateTime AnswerDatetime { get; set; }
-        public ICollection<AnswerDetail>? AnswerDetails { get; set; }
+        public List<AnswerDetail> AnswerDetails { get; set; } = new List<AnswerDetail>();
     }
 }

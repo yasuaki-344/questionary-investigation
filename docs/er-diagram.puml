@@ -31,10 +31,10 @@ entity AnswerDetail {
   --
   * QuestionID: number <<FK>>
   * AnswerID: number <<FK>>
-  AnswerDatail: text
+  * AnswerDatail: text
 }
 
-Answer }o--|| AnswerDetail
-Question }o--|| QuestionChoice
-Question }o--|| AnswerDetail
+Answer ||--o{ AnswerDetail
+Question ||--o{ QuestionChoice
+Question ||--o{ AnswerDetail
 @enduml
